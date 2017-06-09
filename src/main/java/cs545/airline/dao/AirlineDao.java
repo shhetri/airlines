@@ -1,28 +1,29 @@
 package cs545.airline.dao;
 
 import cs545.airline.model.Airline;
+import edu.mum.gf.workaround.JpaUtil;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Named
 @ApplicationScoped
-@Transactional
 public class AirlineDao {
 
-    @PersistenceContext(unitName = "cs545")
+//    @PersistenceContext(unitName = "cs545")
 //	private static EntityManager entityManager;
 //  Couldn't figure out another way to inject the persistence context
-    private EntityManager entityManager;
+    private EntityManager entityManager = JpaUtil.getEntityManager();
 
 
     public void create(Airline airline) {
+        entityManager.getTransaction().begin();
         entityManager.persist(airline);
+        entityManager.flush();
+        entityManager.getTransaction().commit();
     }
 
     public Airline update(Airline airline) {
