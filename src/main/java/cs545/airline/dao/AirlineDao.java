@@ -6,6 +6,7 @@ import edu.mum.gf.workaround.JpaUtil;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.List;
 
@@ -13,25 +14,32 @@ import java.util.List;
 @ApplicationScoped
 public class AirlineDao {
 
-//    @PersistenceContext(unitName = "cs545")
+    //    @PersistenceContext(unitName = "cs545")
 //	private static EntityManager entityManager;
 //  Couldn't figure out another way to inject the persistence context
     private EntityManager entityManager = JpaUtil.getEntityManager();
 
 
     public void create(Airline airline) {
-        entityManager.getTransaction().begin();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
         entityManager.persist(airline);
-        entityManager.flush();
-        entityManager.getTransaction().commit();
+        transaction.commit();
     }
 
     public Airline update(Airline airline) {
-        return entityManager.merge(airline);
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        airline = entityManager.merge(airline);
+        transaction.commit();
+        return airline;
     }
 
     public void delete(Airline airline) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
         entityManager.remove(airline);
+        transaction.commit();
     }
 
     public Airline findOne(long id) {

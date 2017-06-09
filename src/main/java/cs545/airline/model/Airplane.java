@@ -3,13 +3,7 @@ package cs545.airline.model;
 import java.util.Collections;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 @Entity
 @Table(uniqueConstraints=@UniqueConstraint(columnNames={"serialnr"}))
@@ -22,7 +16,7 @@ public class Airplane {
 	private String serialnr;
 	private String model;
 	private int capacity;
-	@OneToMany(mappedBy="airplane")
+	@OneToMany(mappedBy="airplane", cascade = CascadeType.REMOVE)
 	@OrderBy("departureDate, departureTime")
 	private List<Flight> flights;
 
@@ -81,7 +75,7 @@ public class Airplane {
 		}
 		return success;
 	}
-	
+
 	public boolean removeFlight(Flight flight) {
 		boolean success = false;
 		if (flights.remove(flight)) {
