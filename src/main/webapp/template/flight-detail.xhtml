@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+    <ui:composition>
+        <h:panelGrid rendered="#{flightController.flight!=null}">
+            <h:panelGrid columns="5" border="1" cellpadding="10" cellspacing="1">
+                <f:facet name="header"><h:outputText value="Flight Details"/></f:facet>
+                <h:panelGrid columns="2" cellpadding="10" cellspacing="1">
+                    <f:facet name="header">Flight</f:facet>
+                    <h:outputLabel value="Flight Number" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.flightnr}"/>
+                    <h:outputLabel value="Arrival Date" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.arrivalDate}"/>
+                    <h:outputLabel value="Arrival Time" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.arrivalTime}"/>
+                    <h:outputLabel value="Departure Date" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.departureDate}"/>
+                    <h:outputLabel value="Departure Time" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.departureTime}"/>
+                </h:panelGrid>
+                <h:panelGrid cellpadding="10" cellspacing="1" columns="2">
+                    <f:facet name="header">Airline</f:facet>
+                    <h:outputLabel value="Name" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.airline.name}"/>
+                </h:panelGrid>
+                <h:panelGrid cellpadding="10" cellspacing="1" columns="2">
+                    <f:facet name="header">Airplane</f:facet>
+                    <h:outputLabel value="Model" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.airplane.model}"/>
+                    <h:outputLabel value="Serial Number" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.airplane.serialnr}"/>
+                    <h:outputLabel value="Capacity" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.airplane.capacity}"/>
+                </h:panelGrid>
+                <h:panelGrid cellpadding="10" cellspacing="1" columns="2">
+                    <f:facet name="header">Origin</f:facet>
+                    <h:outputLabel value="Name" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.origin.name}"/>
+                    <h:outputLabel value="Airport Code" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.origin.airportcode}"/>
+                    <h:outputLabel value="City" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.origin.city}"/>
+                    <h:outputLabel value="Country" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.origin.country}"/>
+                </h:panelGrid>
+                <h:panelGrid cellpadding="10" cellspacing="1" columns="2">
+                    <f:facet name="header">Destination</f:facet>
+                    <h:outputLabel value="Name" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.destination.name}"/>
+                    <h:outputLabel value="Airport Code" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.destination.airportcode}"/>
+                    <h:outputLabel value="City" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.destination.city}"/>
+                    <h:outputLabel value="Country" style="font-weight: bold"/>
+                    <h:outputText value="#{flightController.flight.destination.country}"/>
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:panelGrid>
+    </ui:composition>
+</h:body>
+</html>
