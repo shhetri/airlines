@@ -123,5 +123,6 @@ public class FlightController implements Serializable {
         loadFlights();
         filterBy = null;
         filterValue = null;
+        flight = null;
     }
 }

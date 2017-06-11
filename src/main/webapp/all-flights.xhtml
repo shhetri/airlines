@@ -3,61 +3,27 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 >
 <h:head>
     <h:outputStylesheet name="styles.css" library="css"/>
 </h:head>
 <h:body>
     <h1>All Flights</h1>
-    <div><h:form>
-        <h3>Filter Flight List
-            <h:commandButton action="#{flightController.resetFilter()}" value="Reset"/>
-        </h3>
-    </h:form>
+    <div>
+        <h:form>
+            <h3>Filter Flight List
+                <h:commandButton action="#{flightController.resetFilter()}" value="Reset"/>
+            </h3>
+        </h:form>
     </div>
-    <h:form>
-        <span>By : </span>
-        <h:selectOneMenu value="#{flightController.filterBy}">
-            <f:ajax render="filterform"/>
-            <f:selectItem itemLabel="Choose Filter"/>
-            <f:selectItem itemLabel="Airline" itemValue="airline"/>
-            <f:selectItem itemLabel="Destination" itemValue="destination"/>
-            <f:selectItem itemLabel="Departure" itemValue="departure"/>
-            <f:selectItem itemLabel="Arrival" itemValue="arrival"/>
-        </h:selectOneMenu>
-        <h:panelGroup id="filterform" styleClass="search-box">
-            <h:inputText value="#{flightController.filterValue}" rendered="#{flightController.isFilterName()}" p:placeholder="Enter search value">
-                <f:validator validatorId="reqValidator"/>
-            </h:inputText>
-            <h:inputText value="#{flightController.filterValue}" rendered="#{flightController.isFilterDate()}" p:placeholder="Enter search value">
-                <f:validator validatorId="reqValidator"/>
-                <f:validator validatorId="dateValidator"/>
-            </h:inputText>
-            <h:commandButton value="Submit" rendered="#{flightController.filterBy!=null}"
-                             action="#{flightController.filter()}">
-                <f:ajax render=":flight-list" execute="@form"/>
-            </h:commandButton>
-        </h:panelGroup>
-    </h:form>
+
+    <ui:include src="template/flight-filter.xhtml"/>
 
     <h:form id="flight-list">
         <h:messages globalOnly="true" style="color: red"/>
         <hr/>
-        <f:ajax render=":detail">
-            <h:dataTable value="#{flightController.flights}" var="f">
-                <h:column>
-                    <f:facet name="header">Flight Number</f:facet>
-                    <h:outputText value="#{f.flightnr}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Action</f:facet>
-                    <h:commandLink value="Show Detail" action="#{flightController.findFlight(f.id)}"/>
-                </h:column>
-            </h:dataTable>
-        </f:ajax>
+        <ui:include src="template/flight-list.xhtml"/>
     </h:form>
     <br/>
     <h:panelGrid id="detail" styleClass="header">

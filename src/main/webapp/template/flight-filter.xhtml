@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+>
+<h:body>
+    <ui:composition>
+        <h:form>
+            <span>By : </span>
+            <h:selectOneMenu value="#{flightController.filterBy}">
+                <f:ajax render="filterform"/>
+                <f:selectItem itemLabel="Choose Filter"/>
+                <f:selectItem itemLabel="Airline" itemValue="airline"/>
+                <f:selectItem itemLabel="Destination" itemValue="destination"/>
+                <f:selectItem itemLabel="Departure" itemValue="departure"/>
+                <f:selectItem itemLabel="Arrival" itemValue="arrival"/>
+            </h:selectOneMenu>
+            <h:panelGroup id="filterform" styleClass="search-box">
+                <h:inputText value="#{flightController.filterValue}" rendered="#{flightController.isFilterName()}"
+                             p:placeholder="Enter search value">
+                    <f:validator validatorId="reqValidator"/>
+                </h:inputText>
+                <h:inputText value="#{flightController.filterValue}" rendered="#{flightController.isFilterDate()}"
+                             p:placeholder="Enter search date">
+                    <f:validator validatorId="reqValidator"/>
+                    <f:validator validatorId="dateValidator"/>
+                </h:inputText>
+                <h:commandButton value="Submit" rendered="#{flightController.filterBy!=null}"
+                                 action="#{flightController.filter()}">
+                    <f:ajax render=":flight-list" execute="@form"/>
+                </h:commandButton>
+            </h:panelGroup>
+        </h:form>
+    </ui:composition>
+</h:body>
+</html>
