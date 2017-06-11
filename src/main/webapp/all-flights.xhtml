@@ -14,28 +14,31 @@
         .header table table th {
             border-bottom: 1px solid;
         }
+
+        .search-box input {
+            margin: 0 5px;
+        }
     </style>
 </h:head>
 <h:body>
     <h1>All Flights</h1>
-    <div>
+    <div><h:form>
         <h3>Filter Flight List
-            <h:form>
-                <h:commandButton action="#{flightController.resetFilter()}" value="Reset"/>
-            </h:form>
+            <h:commandButton action="#{flightController.resetFilter()}" value="Reset"/>
         </h3>
+    </h:form>
     </div>
     <h:form>
         <span>By : </span>
         <h:selectOneMenu value="#{flightController.filterBy}">
-            <f:ajax render="filterform" />
+            <f:ajax render="filterform"/>
             <f:selectItem itemLabel="Choose Filter"/>
             <f:selectItem itemLabel="Airline" itemValue="airline"/>
             <f:selectItem itemLabel="Destination" itemValue="destination"/>
             <f:selectItem itemLabel="Departure" itemValue="departure"/>
             <f:selectItem itemLabel="Arrival" itemValue="arrival"/>
         </h:selectOneMenu>
-        <h:panelGrid id="filterform">
+        <h:panelGroup id="filterform" styleClass="search-box">
             <h:inputText value="#{flightController.filterValue}" rendered="#{flightController.isFilterName()}">
                 <f:validator validatorId="reqValidator"/>
             </h:inputText>
@@ -47,10 +50,12 @@
                              action="#{flightController.filter()}">
                 <f:ajax render=":flight-list" execute="@form"/>
             </h:commandButton>
-        </h:panelGrid>
+        </h:panelGroup>
     </h:form>
+
     <h:form id="flight-list">
         <h:messages globalOnly="true" style="color: red"/>
+        <hr/>
         <f:ajax render=":detail">
             <h:dataTable value="#{flightController.flights}" var="f">
                 <h:column>
