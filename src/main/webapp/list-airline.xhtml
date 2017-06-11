@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+    <h:outputStylesheet library="css" name="styles.css"/>
+    <style type="text/css">
+        .table {
+            border-collapse: collapse;
+        }
+
+        .table-header {
+            text-align: center;
+            background: none repeat scroll 0 0 #E5E5E5;
+            border-bottom: 1px solid #BBBBBB;
+            padding: 12px;
+        }
+
+        .table-odd-row {
+            text-align: center;
+            background: none repeat scroll 0 0 lightgray;
+            border-top: 1px solid #BBBBBB;
+        }
+
+        .table-even-row {
+            text-align: center;
+            background: none repeat scroll 0 0 #F8F8F8;
+            border-top: 1px solid #BBBBBB;
+        }
+    </style>
+</h:head>
+<h:body>
+    <h:form>
+        <h:dataTable value="#{airlineController.airlines}" var="a"
+                     styleClass="table"
+                     headerClass="table-header"
+                     rowClasses="table-odd-row,table-even-row"
+                     cellpadding="10" cellspacing="1"
+        >
+            <f:facet name="header">Airlines</f:facet>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{a.name}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Flights</f:facet>
+                <ui:repeat value="#{a.flights}" var="f">
+                    <h:outputText value="#{f.flightnr}"/>&nbsp;
+                </ui:repeat>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Actions</f:facet>
+                <h:panelGroup>
+                    <h:commandButton value="Edit" action="#{airlineController.edit(a)}"/> &nbsp;
+                    <h:commandButton value="Delete" action="#{airlineController.delete(a.name)}"/>
+                </h:panelGroup>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+    <h:link value="Back to index" outcome="/faces/airline-management.xhtml"/>
+</h:body>
+</html>

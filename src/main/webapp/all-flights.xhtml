@@ -6,6 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
 >
 <h:head>
+    <title>Flights</title>
     <h:outputStylesheet name="styles.css" library="css"/>
 </h:head>
 <h:body>
@@ -14,6 +15,8 @@
         <h:form>
             <h3>Filter Flight List
                 <h:commandButton action="#{flightController.resetFilter()}" value="Reset"/>
+                &nbsp;
+                <h:link value="Back to index" outcome="/faces/index.xhtml"/>
             </h3>
         </h:form>
     </div>

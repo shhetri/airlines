@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h1>Edit Airline</h1>
+    <h:form>
+        <h:outputLabel value="Name"/>&nbsp;
+        <h:inputText value="#{airlineController.airline.name}">
+            <f:validator validatorId="reqValidator"/>
+            <f:validator validatorId="uniqueValidator"/>
+        </h:inputText>&nbsp;
+        <h:commandButton value="Upate" action="#{airlineController.update(airlineController.airline.id)}"/>
+        <h:panelGroup>
+            <h:messages globalOnly="true" style="color: red"/>
+        </h:panelGroup>
+    </h:form>
+    <br/>
+    <h:link value="Back to list" outcome="/faces/list-airline.xhtml"/>
+</f:view>
+</html>
