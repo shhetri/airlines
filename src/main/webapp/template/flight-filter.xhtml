@@ -14,10 +14,10 @@
             <h:selectOneMenu value="#{flightController.filterBy}">
                 <f:ajax render="filterform"/>
                 <f:selectItem itemLabel="Choose Filter"/>
-                <f:selectItem itemLabel="Airline" itemValue="airline"/>
-                <f:selectItem itemLabel="Destination" itemValue="destination"/>
-                <f:selectItem itemLabel="Departure" itemValue="departure"/>
-                <f:selectItem itemLabel="Arrival" itemValue="arrival"/>
+                <f:selectItem itemLabel="Airline Name" itemValue="airline"/>
+                <f:selectItem itemLabel="Destination Name" itemValue="destination"/>
+                <f:selectItem itemLabel="Departure Date/Time" itemValue="departure"/>
+                <f:selectItem itemLabel="Arrival Date/Time" itemValue="arrival"/>
             </h:selectOneMenu>
             <h:panelGroup id="filterform" styleClass="search-box">
                 <h:inputText value="#{flightController.filterValue}" rendered="#{flightController.isFilterName()}"
