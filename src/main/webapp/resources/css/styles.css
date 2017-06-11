@@ -1,0 +1,11 @@
+.header table td {
+    vertical-align: top;
+}
+
+.header table table th {
+    border-bottom: 1px solid;
+}
+
+.search-box input {
+    margin: 0 5px;
+}
