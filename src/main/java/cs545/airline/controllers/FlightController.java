@@ -16,7 +16,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Named
 @SessionScoped
@@ -102,14 +101,14 @@ public class FlightController implements Serializable {
                 break;
             case "arrival":
                 try {
-                    flights = flightService.findByArrival(DateFormat.getDateInstance(DateFormat.SHORT, Locale.US).parse(filterValue));
+                    flights = flightService.findByArrival(DateFormat.getInstance().parse(filterValue));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 break;
             case "departure":
                 try {
-                    flights = flightService.findByDeparture(DateFormat.getDateInstance(DateFormat.SHORT, Locale.US).parse(filterValue));
+                    flights = flightService.findByDeparture(DateFormat.getInstance().parse(filterValue));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

@@ -7,18 +7,19 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.Locale;
 
-@FacesValidator("dateValidator")
-public class DateValidator implements Validator {
+@FacesValidator("dateTimeValidator")
+public class DateTimeValidator implements Validator {
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
         try {
-            DateFormat.getDateInstance(DateFormat.SHORT, Locale.US).parse(o.toString());
-        } catch (ParseException e) {
+            String[] dateTime = o.toString().split(" ");
+            DateFormat.getDateInstance(DateFormat.SHORT, Locale.US).parse(dateTime[0]);
+            DateFormat.getTimeInstance(DateFormat.SHORT, Locale.US).parse(dateTime[1] + " " + dateTime[2]);
+        } catch (Exception e) {
             e.printStackTrace();
-            FacesMessage msg = new FacesMessage("Please enter valid date");
+            FacesMessage msg = new FacesMessage("Please enter valid date and time. eg: 6/25/15 1:45 PM");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             throw new ValidatorException(msg);
         }

@@ -27,7 +27,7 @@
                 <h:inputText value="#{flightController.filterValue}" rendered="#{flightController.isFilterDate()}"
                              p:placeholder="Enter search date">
                     <f:validator validatorId="reqValidator"/>
-                    <f:validator validatorId="dateValidator"/>
+                    <f:validator validatorId="dateTimeValidator"/>
                 </h:inputText>
                 <h:commandButton value="Submit" rendered="#{flightController.filterBy!=null}"
                                  action="#{flightController.filter()}">
